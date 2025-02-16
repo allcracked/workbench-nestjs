@@ -39,4 +39,16 @@ export class OrganizationService {
       );
     }
   }
+
+  async findAll(): Promise<Organization[]> {
+    try {
+      return Promise.resolve(organizations);
+    } catch (error) {
+      console.error(error);
+      throw new HttpException(
+        'Unable to find organizations',
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
+  }
 }

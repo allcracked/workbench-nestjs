@@ -34,6 +34,21 @@ export class OrganizationResolver {
     }
   }
 
+  @Query(() => [Organization], { name: 'organizations' })
+  async getOrganizations() {
+    try {
+      const organizations = await this.organizationService.findAll();
+
+      return organizations;
+    } catch (error) {
+      console.error(error);
+      throw new HttpException(
+        'Unable to find organizations',
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
+  }
+
   @ResolveField('users', () => [User])
   async users(@Parent() organization: Organization) {
     try {
