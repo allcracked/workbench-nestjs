@@ -6,9 +6,9 @@ export class Organization {
   @Field((type) => Int)
   id: number;
 
+  @Field()
   name: string;
-  email: string;
 
   @Field((type) => [User])
-  users: User[];
+  users?: User[];
 }

@@ -5,31 +5,31 @@ const users: User[] = [
   {
     id: 1,
     name: 'John Doe',
-    email: '',
+    email: 'john@mail.com',
     organizationId: 1,
   },
   {
     id: 2,
     name: 'Jane Doe',
-    email: '',
+    email: 'jane@mail.com',
     organizationId: 2,
   },
   {
     id: 3,
     name: 'Alice',
-    email: '',
+    email: 'alice@mail.com',
     organizationId: 1,
   },
   {
     id: 4,
     name: 'Bob',
-    email: '',
+    email: 'bob@mail.com',
     organizationId: 2,
   },
   {
     id: 5,
     name: 'Charlie',
-    email: '',
+    email: 'charlie@mail.com',
     organizationId: 1,
   },
 ];
@@ -56,21 +56,29 @@ export class UserService {
     }
   }
 
-  async findAll() {
+  async findAll(): Promise<User[]> {
     try {
       return Promise.resolve(users);
     } catch (error) {
       console.error(error);
+      throw new HttpException(
+        'Unable to find users',
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
     }
   }
 
-  async findByOrganizationId(organizationId: number) {
+  async findByOrganizationId(organizationId: number): Promise<User[]> {
     try {
       return Promise.resolve(
         users.filter((user) => user.organizationId === organizationId),
       );
     } catch (error) {
       console.error(error);
+      throw new HttpException(
+        'Unable to find users',
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
     }
   }
 }
